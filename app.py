@@ -69,7 +69,7 @@ def ensure_nltk_data() -> None:
     this function downloads them on demand.  The download calls are
     idempotent: if the data already exists, nothing happens.
     """
-     import os
+    import os
     TMP_DIR = '/tmp/nltk_data'
     os.makedirs(TMP_DIR, exist_ok=True)
     nltk.data.path.append(TMP_DIR)
