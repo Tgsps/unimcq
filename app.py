@@ -69,6 +69,13 @@ def ensure_nltk_data() -> None:
     this function downloads them on demand.  The download calls are
     idempotent: if the data already exists, nothing happens.
     """
+     import os
+    TMP_DIR = '/tmp/nltk_data'
+    os.makedirs(TMP_DIR, exist_ok=True)
+    nltk.data.path.append(TMP_DIR)
+    nltk.download('punkt', download_dir=TMP_DIR)
+    nltk.download('averaged_perceptron_tagger', download_dir=TMP_DIR)
+    nltk.download('stopwords', download_dir=TMP_DIR)
 
     try:
         nltk.data.find("tokenizers/punkt")
