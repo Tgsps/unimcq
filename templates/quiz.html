@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>MCQ Quiz</h1>
+        <form action="{{ url_for('submit') }}" method="post" class="quiz-form">
+            {% for q in mcqs %}
+            <div class="question-block">
+                <p><strong>{{ loop.index }}. {{ q.question }}</strong></p>
+                {% for option in q.options %}
+                    <label class="option-label">
+                        <input type="radio" name="q{{ q.id }}" value="{{ option }}" required>
+                        {{ option }}
+                    </label><br>
+                {% endfor %}
+                <!-- Preserve question and answer in hidden inputs for grading -->
+                <input type="hidden" name="answer{{ q.id }}" value="{{ q.answer }}">
+                <input type="hidden" name="question{{ q.id }}" value="{{ q.question }}">
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn">Submit Answers</button>
+        </form>
+    </div>
+</body>
+</html>
